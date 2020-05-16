@@ -1,10 +1,11 @@
-/*soft reset do css*/
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body {
     background-image: url('../img/fundo.jpg');
     background-size: auto 100vh;
@@ -12,101 +13,60 @@ body {
     font-family: 'Source Code Pro', monospace;
     font-size: 10px;
 }
-
-/* Se a tela tiver pelo menos 400px vai carregar esses estilos 
-A partir de 400*/
 @media (min-width: 400px) {
   body {
     font-size: 14px;
   }
 }
-
-/* breakpoint, são chamdos esses '@media' */
-/* A partir de 600, sobrescreve a anterior*/
 @media (min-width: 600px) {
   body {
     font-size: 18px;
   }
 }
-
 header {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 a {
   color: teal;
   text-decoration: none;
 }
-
 a:hover {
   text-decoration: underline;
 }
-
 .menu {
   background-color: white;
   position: fixed;
   width: 100vw;
   top: 0;
-  /* Corrige o problema de as animações ultrapassarem o menu, ou sidebar */
   z-index: 1;
 }
-
 .menu ul {
   display: flex;
   justify-content: space-around;
 }
-
 .menu li {
   list-style: none;
 }
 .menu a {
-  /*Normalmente a tag 'a' é um elemento 'inline', ou seja, não quebra linha
-  colocando o display como 'block', ele passa a ser um bloco, fazendo assim
-  com que o 'padding' e outras propiedades possam ser usadas*/
   display: block;
-  /*       em cima e em baixo // dos lados*/
-  padding: 10px 20px ;
+  padding: 10px 20px;
   transition: background-color 600ms, color 1s;
 }
-
 .menu a:active,
 .menu a:hover {
   background-color: teal;
   color: white;
 }
-
-/* Isso faz com que o nome da tela pricipal comece com uma escala menor
-   transladado 50vh para baixo (verticalmente/ eixo Y)
-   com uma opcatidade de 0, ou seja, totalmente transparente*/
 .titulo {
   transform: scale(0.2) translateY(50vh);
   opacity: 0;
-  /* tempo de delay  tipo de variação  tempo de duração da animação  nome da função de animação 
-    A palavra reservada forwards faz com que seja mantido o ultimo estado da animação*/
-  animation: 500ms linear 2s animacaoTitulo forwards;
+  animation: 1s ease 500ms animacaoTitulo forwards;
 }
 
 @keyframes animacaoTitulo {
-  /* keyframes funcionam a partir da porcentagem do carregamento da página
-     Ou podemos usar tbm da seguinte forma 
-     from {
-       "Propiedades com valores iniciais"
-     }
-     to {
-       "Propiedades com valores finais"
-     
-     OU
-
-     0% {
-      "Estado inicial"
-     }
-     ...
-     100% {
-      "Estado final"
-       */
   from {
     transform: scale(0.2) translateY(50vh);
     opacity: 0;
@@ -116,111 +76,145 @@ a:hover {
     opacity: 1;
   }
 }
-
 .site-subtitle,
 .site-title {
   color: whitesmoke;
   text-align: center;
 }
-
 .site-title {
   font-size: 4em;
   font-family: 'Gloria Hallelujah', cursive;
 }
-
 .site-subtitle {
   font-style: italic;
   font-family: 'Press Start 2P', cursive;
   line-height: 1.8em;
 }
-
+.sobre,
 .contato,
 .portifolio {
   padding: 2em;
   min-height: 100vh;
 }
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.sobre h2,
 .contato h2 , 
 .portifolio h2 {
   font-family: 'Press Start 2P', cursive;
   color: whitesmoke;
   margin-bottom: 1.5em;
   font-size: 2em;
-  line-height: 2.5em;
+  line-height: 3em;
 }
-
+.sobre .avatar img {
+  max-width: 400px;
+  max-height: 400px;
+  object-fit: cover;
+  object-position: left top;
+}
+.sobre .avatar{
+  max-width: 350px;
+  max-height: 350px;
+}
+.sobre .avatar {
+  margin-left: auto;
+  margin-right: auto;
+  clip-path: polygon(50% 25%, 100% 0, 100% 60%, 50% 93%, 0 60%, 0 0);
+}
+@media (min-width: 600px) {
+  .sobre .avatar {
+    margin-left: 2em;
+    float: right;
+    clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+  }
+}
+.sobre p {
+  color: whitesmoke;
+  text-indent: 1.4em;
+  margin-bottom: 1.4em;
+  text-align: justify;
+}
+.sobre a {
+  color: whitesmoke;
+  text-decoration: underline;
+}
+.sobre a:hover{
+  text-decoration: none;
+  background-color: cyan;
+  color: magenta;
+}
 .portifolio .grid {
   display: grid;
-  /* espaçamento entre os elementos */
   gap: 2em;
 }
-
-/* Se a o dispositivo tiver pelo menos 560px de largura, serão renderizadas 2 colunas */
 @media (min-width: 560px) {
   .portifolio .grid {
     grid-template-columns: 240px 240px;
   }
 }
-
-/* Se a o dispositivo tiver pelo menos 880px de largura, serão renderizadas 3 colunas */
 @media (min-width: 880px) {
   .portifolio .grid {
-    /* essa é uma função que retorna n vezes o valor x 
-                          repeat(n, Xpx)*/
     grid-template-columns: repeat(3, 260px);
     align-content: center;
     justify-content: center;
-    /* Uma ideia → aultura da tela (em vh) - margem superior do <h2>  de Projetos - aultura do texto de <h2> de Projetos - marge, inferior do <h2>  de Projetos*/
     height: calc(100vh - 8em - 48px);
   }
 }
-
 .portifolio figure {
   text-align: center;
 }
-
+.img-portfolio-with-zoom,
 .img-portfolio {
-  width: 240px;
   height: 180px;
-  /* Fazendo isso independente do tamanho da imagem essa propiedade faz com que a imagem se adeque as proporção do objeto em que ela está */
+  width: 100%;
   object-fit: cover;
-  /* Com essa propiedade podemos definir o alinhamento, ou seja, a partir de que parte da imagem, direita, esquerda, cima ou baixo, queremos o alinhamento da imagem 
-     Podendo 2 direções */
-  /* Ou unidades de medidas 
-     Quando usamos unidades de medidas, normalmente ordem é x e y, porém quando colocamos apenas 1 valor ele mexe apenas com o eixo x*/
   object-position: left bottom;
   transition: transform 500ms;
-}
-
-.img-portfolio:hover {
-  /* Essa propiedade tem algumas funções que permitem transformar qualquer elemento
-     Nesse caso queremos o Zoom da imagem
-     scale() da zoom, por padrão todo objeto tem escala 1 como default
-     rotate() rotaciona a imagem*/
+}.img-portfolio-with-zoom:hover {
   transform: scale(1.2) rotate(-2deg);
 }
-
-/* @media (min-width: 1200px ) {
-  .img-portfolio {
-    height: auto;
-    width: 100%;
-  }
-} */
-
+.flip-card {
+  perspective: 400px;
+}
+.card {position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+.flip-card:hover .card{
+  transform: rotateY(180deg);
+}
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+.card-back {
+  background-color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+  width: 100%;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  transform: rotateY(180deg);
+}
 .contato a {
   color: whitesmoke;
   font-size: 5em;
   text-decoration: none;
   transition: text-shadow 1s;
-}
-
-.contato .grid {
+}.contato .grid {
   text-align: center;
-}
-
-/* O 'active' é usado paraos mobile como uma substituição do hover, já que não temos hover lá
- é "ligado assim que o objeto é clicado"*/
-.contato a:active,
+}.contato a:active,
 .contato a:hover {
-  /*      eixos x  e y   blur  cor*/
   text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
 }
